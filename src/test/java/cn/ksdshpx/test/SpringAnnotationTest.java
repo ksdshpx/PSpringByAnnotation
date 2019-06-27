@@ -2,6 +2,7 @@ package cn.ksdshpx.test;
 
 import cn.ksdshpx.bean.Person;
 import cn.ksdshpx.config.MainConfig;
+import cn.ksdshpx.config.MainConfig2;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -28,5 +29,17 @@ public class SpringAnnotationTest {
         for (String beanDefinitionName : beanDefinitionNames) {
             System.out.println(beanDefinitionName);
         }
+    }
+
+    @Test
+    public void test3(){
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfig2.class);
+        String[] beanDefinitionNames = ctx.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            System.out.println(beanDefinitionName);
+        }
+        Person person = ctx.getBean("person",Person.class);
+        Person person2 = ctx.getBean("person",Person.class);
+        System.out.println(person == person2);
     }
 }
