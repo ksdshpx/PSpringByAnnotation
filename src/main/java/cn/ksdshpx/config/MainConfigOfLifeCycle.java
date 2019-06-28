@@ -25,6 +25,10 @@ import org.springframework.context.annotation.Configuration;
  * 3）使用JSR250规范定义的@PostConstruct以及@PreDestroy
  *         @PostConstruct:在Bean创建完成，并且赋值完成后进行初始化
  *         @PreDestroy：在IOC容器销毁Bean之前清理工作
+ * 4）BeanPostProcessor:Bean的后置处理器
+ *      在Bean的初始化前后进行一些处理工作
+ *      4.1)postProcessBeforeInitialization:初始化之前工作
+ *      4.2)postProcessAfterInitialization:初始化之后工作
  */
 @ComponentScan("cn.ksdshpx.bean")
 @Configuration
