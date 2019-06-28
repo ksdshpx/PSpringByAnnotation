@@ -1,5 +1,6 @@
 package cn.ksdshpx.config;
 
+import cn.ksdshpx.bean.ColorFactoryBean;
 import cn.ksdshpx.bean.Person;
 import cn.ksdshpx.bean.Student;
 import org.springframework.context.annotation.*;
@@ -55,5 +56,14 @@ public class MainConfig2 {
      *              id默认为全类名
      *      3.2）ImportSelector:返回需要导入的组件的全类名数组
      *      3.3）ImportBeanDefinitionRegistrar:手动注册bean到IOC容器中
+     * 4)使用Spring提供的FactoryBean(工厂Bean):工厂Bean获取的getObject()方法返回的对象
      */
+
+    /**
+     * 工厂Bean
+     */
+    @Bean
+    public ColorFactoryBean colorFactoryBean(){
+        return new ColorFactoryBean();
+    }
 }

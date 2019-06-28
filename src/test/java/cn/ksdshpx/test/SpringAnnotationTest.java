@@ -1,5 +1,6 @@
 package cn.ksdshpx.test;
 
+import cn.ksdshpx.bean.ColorFactoryBean;
 import cn.ksdshpx.bean.Person;
 import cn.ksdshpx.config.MainConfig;
 import cn.ksdshpx.config.MainConfig2;
@@ -68,5 +69,9 @@ public class SpringAnnotationTest {
         for (String beanDefinitionName : beanDefinitionNames) {
             System.out.println(beanDefinitionName);
         }
+        Object bean = ctx.getBean("colorFactoryBean");
+        System.out.println(bean.getClass());//class cn.ksdshpx.bean.Color
+        Object bean2 = ctx.getBean("&colorFactoryBean");
+        System.out.println(bean2.getClass());//       class cn.ksdshpx.bean.ColorFactoryBean
     }
 }
