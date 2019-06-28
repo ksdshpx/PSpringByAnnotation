@@ -12,7 +12,7 @@ import org.springframework.context.annotation.*;
  * Description:主配置类
  */
 //@Import：快速给IOC容器中导入一个组件，id默认为类的全类名
-@Import(Student.class)
+@Import({Student.class,MyImportSelector.class})
 @Configuration
 public class MainConfig2 {
     //默认是单实例的
@@ -51,5 +51,8 @@ public class MainConfig2 {
      * 1)自己写的类：包扫描+组件标注注解(@Controller/@Service/@Repository/@Component)
      * 2)导入的第三方包：@Bean
      * 3)快速给容器中导入一个组件：@Import
+     *      3.1）@Import(要导入到容器中的组件)：容器中就会自动注册这个组件
+     *              id默认为全类名
+     *      3.2）ImportSelector:返回需要导入的组件的全类名数组
      */
 }
