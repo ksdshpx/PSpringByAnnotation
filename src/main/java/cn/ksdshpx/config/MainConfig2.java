@@ -1,10 +1,7 @@
 package cn.ksdshpx.config;
 
 import cn.ksdshpx.bean.Person;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 /**
  * Create with IntelliJ IDEA
@@ -28,5 +25,21 @@ public class MainConfig2 {
     public Person person(){
         System.out.println("person()...");
         return new Person("liSi",25);
+    }
+
+    /**
+     * @Conditional:按照一定的条件注册Bean
+     * 需求：如果系统是windows,给容器中注册bili,如果是linux,给容器注册linus
+     */
+    @Conditional(WindowsCondition.class)
+    @Bean("bill")
+    public Person person01(){
+        return new Person("bili",60);
+    }
+
+    @Conditional(LinuxCondition.class)
+    @Bean("linus")
+    public Person person02(){
+        return new Person("linus",50);
     }
 }
