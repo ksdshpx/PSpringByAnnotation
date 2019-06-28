@@ -1,5 +1,8 @@
 package cn.ksdshpx.bean;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +16,8 @@ import javax.annotation.PreDestroy;
  * Description:
  */
 @Component
-public class Dog {
+public class Dog implements ApplicationContextAware {
+    private ApplicationContext applicationContext;
     public Dog(){
         System.out.println("Dog Constructor()...");
     }
@@ -28,5 +32,9 @@ public class Dog {
     @PreDestroy
     public void destroy(){
         System.out.println("Dog @PreDestroy...");
+    }
+
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 }

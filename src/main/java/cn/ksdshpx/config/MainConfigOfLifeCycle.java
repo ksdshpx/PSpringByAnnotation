@@ -38,6 +38,10 @@ import org.springframework.context.annotation.Configuration;
  * 	    invokeInitMethods(beanName, wrappedBean, mbd);
  * 		applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
  *    }
+ *
+ *   Spring底层对BeanPostProcessor的使用
+ *      Bean赋值，注入其他组件，@Autowired，生命周期注解功能等等都是用BeanPostProcessor完成的
+ *
  */
 @ComponentScan("cn.ksdshpx.bean")
 @Configuration
