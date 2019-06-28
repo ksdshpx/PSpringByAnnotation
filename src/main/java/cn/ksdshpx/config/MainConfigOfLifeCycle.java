@@ -2,6 +2,7 @@ package cn.ksdshpx.config;
 
 import cn.ksdshpx.bean.Car;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -20,7 +21,9 @@ import org.springframework.context.annotation.Configuration;
  * 1）指定初始化和销毁方法
  *      通过@Bean注解指定init-method(对象创建完成并赋值好后)和
  *      destroy-method(单实例Bean容器关闭后，多实例Bean容器不会管理)
+ * 2）通过Bean实现InitializingBean定义初始化逻辑，DisposableBean定义销毁逻辑
  */
+@ComponentScan("cn.ksdshpx.bean")
 @Configuration
 public class MainConfigOfLifeCycle {
     @Bean(value = "car",initMethod = "init",destroyMethod = "destroy")
