@@ -29,6 +29,15 @@ import org.springframework.context.annotation.Configuration;
  *      在Bean的初始化前后进行一些处理工作
  *      4.1)postProcessBeforeInitialization:初始化之前工作
  *      4.2)postProcessAfterInitialization:初始化之后工作
+ *
+ *  流程源代码：
+ *  ①populateBean(beanName, mbd, instanceWrapper):给Bean进行属性赋值
+ *  ②initializeBean(beanName, exposedObject, mbd):初始化
+ *    {
+ *      applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
+ * 	    invokeInitMethods(beanName, wrappedBean, mbd);
+ * 		applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
+ *    }
  */
 @ComponentScan("cn.ksdshpx.bean")
 @Configuration
