@@ -38,8 +38,8 @@ public class SpringAnnotationTest {
         for (String beanDefinitionName : beanDefinitionNames) {
             System.out.println(beanDefinitionName);
         }
-        Person person = ctx.getBean("person",Person.class);
-        Person person2 = ctx.getBean("person",Person.class);
-        System.out.println(person == person2);
+        //Person person = ctx.getBean("person",Person.class);
+        //Person person2 = ctx.getBean("person",Person.class);
+        //System.out.println(person == person2);
     }
 }
