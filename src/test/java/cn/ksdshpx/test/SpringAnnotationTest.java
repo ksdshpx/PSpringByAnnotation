@@ -2,10 +2,9 @@ package cn.ksdshpx.test;
 
 import cn.ksdshpx.bean.ColorFactoryBean;
 import cn.ksdshpx.bean.Person;
-import cn.ksdshpx.config.MainConfig;
-import cn.ksdshpx.config.MainConfig2;
-import cn.ksdshpx.config.MainConfigOfLifeCycle;
-import cn.ksdshpx.config.MainConfigOfPropertyValue;
+import cn.ksdshpx.config.*;
+import cn.ksdshpx.dao.BookDao;
+import cn.ksdshpx.service.BookService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -94,6 +93,16 @@ public class SpringAnnotationTest {
         }
         Person person = ctx.getBean("person", Person.class);
         System.out.println(person);
+        ctx.close();
+    }
+
+    @Test
+    public void test8(){
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfigOfAutowired.class);
+        BookService bookService = ctx.getBean("bookService",BookService.class);
+        System.out.println(bookService);
+        BookDao bookDao = ctx.getBean("bookDao",BookDao.class);
+        System.out.println(bookDao);
         ctx.close();
     }
 }
