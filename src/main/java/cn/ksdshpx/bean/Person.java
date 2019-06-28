@@ -18,8 +18,12 @@ public class Person {
      */
     @Value("zhangSan")
     private String name;
+
     @Value("#{20-2}")
     private Integer age;
+
+    @Value("${person.nickName}")
+    private String nickName;
 
     public Person() {
     }
@@ -45,11 +49,20 @@ public class Person {
         this.age = age;
     }
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", nickName='" + nickName + '\'' +
                 '}';
     }
 }
