@@ -5,6 +5,7 @@ import cn.ksdshpx.bean.Person;
 import cn.ksdshpx.config.MainConfig;
 import cn.ksdshpx.config.MainConfig2;
 import cn.ksdshpx.config.MainConfigOfLifeCycle;
+import cn.ksdshpx.config.MainConfigOfPropertyValue;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -81,6 +82,18 @@ public class SpringAnnotationTest {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfigOfLifeCycle.class);
         System.out.println("IOC容器创建完成...");
         //关闭容器
+        ctx.close();
+    }
+
+    @Test
+    public void test7(){
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfigOfPropertyValue.class);
+        String[] beanDefinitionNames = ctx.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            System.out.println(beanDefinitionName);
+        }
+        Person person = ctx.getBean("person", Person.class);
+        System.out.println(person);
         ctx.close();
     }
 }

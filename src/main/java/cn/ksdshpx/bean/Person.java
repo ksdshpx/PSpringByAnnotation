@@ -1,5 +1,7 @@
 package cn.ksdshpx.bean;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * Create with IntelliJ IDEA
  * Create by peng.xing
@@ -8,7 +10,15 @@ package cn.ksdshpx.bean;
  * Description:Person实体类
  */
 public class Person {
+    /*
+     * 使用@Value进行属性赋值
+     * 1.基本数值
+     * 2.SpEl:#{}
+     * 3.可以使用${}取出配置文件中的值(在运行环境中)
+     */
+    @Value("zhangSan")
     private String name;
+    @Value("#{20-2}")
     private Integer age;
 
     public Person() {
