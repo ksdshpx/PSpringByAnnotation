@@ -6,6 +6,7 @@ import cn.ksdshpx.config.MainConfig2;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.core.env.Environment;
 
 import java.util.Map;
@@ -58,5 +59,14 @@ public class SpringAnnotationTest {
         System.out.println(osName);
         Map<String, Person> persons = ctx.getBeansOfType(Person.class);
         System.out.println(persons);
+    }
+
+    @Test
+    public void test5(){
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfig2.class);
+        String[] beanDefinitionNames = ctx.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            System.out.println(beanDefinitionName);
+        }
     }
 }

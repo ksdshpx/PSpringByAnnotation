@@ -1,6 +1,7 @@
 package cn.ksdshpx.config;
 
 import cn.ksdshpx.bean.Person;
+import cn.ksdshpx.bean.Student;
 import org.springframework.context.annotation.*;
 
 /**
@@ -10,6 +11,8 @@ import org.springframework.context.annotation.*;
  * Time: 16:21
  * Description:主配置类
  */
+//@Import：快速给IOC容器中导入一个组件，id默认为类的全类名
+@Import(Student.class)
 @Configuration
 public class MainConfig2 {
     //默认是单实例的
@@ -42,4 +45,11 @@ public class MainConfig2 {
     public Person person02(){
         return new Person("linus",50);
     }
+
+    /**
+     * 给容器中注册组件的方式
+     * 1)自己写的类：包扫描+组件标注注解(@Controller/@Service/@Repository/@Component)
+     * 2)导入的第三方包：@Bean
+     * 3)快速给容器中导入一个组件：@Import
+     */
 }
