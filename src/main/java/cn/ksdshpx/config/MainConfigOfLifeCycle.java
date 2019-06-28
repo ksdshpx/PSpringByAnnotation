@@ -22,6 +22,9 @@ import org.springframework.context.annotation.Configuration;
  *      通过@Bean注解指定init-method(对象创建完成并赋值好后)和
  *      destroy-method(单实例Bean容器关闭后，多实例Bean容器不会管理)
  * 2）通过Bean实现InitializingBean定义初始化逻辑，DisposableBean定义销毁逻辑
+ * 3）使用JSR250规范定义的@PostConstruct以及@PreDestroy
+ *         @PostConstruct:在Bean创建完成，并且赋值完成后进行初始化
+ *         @PreDestroy：在IOC容器销毁Bean之前清理工作
  */
 @ComponentScan("cn.ksdshpx.bean")
 @Configuration
