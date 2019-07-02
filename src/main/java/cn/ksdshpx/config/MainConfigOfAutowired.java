@@ -26,8 +26,14 @@ import org.springframework.context.annotation.Configuration;
  *      @Inject:需要导入javax.inject的包，和@Autowired功能一样，但是没有required=false等功能
  *
  *  AutowiredAnnotationBeanPostProcessor:解析完成自动装配功能
+ *
+ *  3）@Autowired:构造器，参数，方法，属性上都可以使用，都是从IOC容器中获取组件的值
+ *          3.1）标注在方法位置:@Bean+方法参数，参数从容器中获取，默认不写@Autowired都能自动装配
+ *          3.2）标注在构造器上：如果组件只有一个有参构造器，这个有参构造器的@Autowired可以省略，参数位置的组件还是从IOC容器中获取
+ *          3.3）标注在参数上
+ *
  */
-@ComponentScan({"cn.ksdshpx.controller","cn.ksdshpx.service","cn.ksdshpx.dao"})
+@ComponentScan({"cn.ksdshpx.controller","cn.ksdshpx.service","cn.ksdshpx.dao","cn.ksdshpx.bean"})
 @Configuration
 public class MainConfigOfAutowired {
 }

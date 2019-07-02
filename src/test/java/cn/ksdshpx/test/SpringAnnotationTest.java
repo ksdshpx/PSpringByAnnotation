@@ -1,6 +1,7 @@
 package cn.ksdshpx.test;
 
-import cn.ksdshpx.bean.ColorFactoryBean;
+import cn.ksdshpx.bean.Boss;
+import cn.ksdshpx.bean.Car;
 import cn.ksdshpx.bean.Person;
 import cn.ksdshpx.config.*;
 import cn.ksdshpx.dao.BookDao;
@@ -8,7 +9,6 @@ import cn.ksdshpx.service.BookService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.core.env.Environment;
 
 import java.util.Map;
@@ -104,5 +104,15 @@ public class SpringAnnotationTest {
         BookDao bookDao = ctx.getBean("bookDao",BookDao.class);
         System.out.println(bookDao);
         ctx.close();
+    }
+
+    @Test
+    public void test9(){
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfigOfAutowired.class);
+        Boss boss = ctx.getBean("boss", Boss.class);
+        System.out.println(boss);
+        System.out.println("---------");
+        Car car = ctx.getBean("car", Car.class);
+        System.out.println(car);
     }
 }

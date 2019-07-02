@@ -1,5 +1,7 @@
 package cn.ksdshpx.bean;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Create with IntelliJ IDEA
  * Create by peng.xing
@@ -7,6 +9,7 @@ package cn.ksdshpx.bean;
  * Time: 13:24
  * Description:Car实体
  */
+@Component
 public class Car {
     public Car(){
         System.out.println("Car Constructor...");
