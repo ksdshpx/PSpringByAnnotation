@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.env.Environment;
 
+import javax.sql.DataSource;
 import java.util.Map;
 
 /**
@@ -114,5 +115,15 @@ public class SpringAnnotationTest {
         System.out.println("---------");
         Car car = ctx.getBean("car", Car.class);
         System.out.println(car);
+    }
+
+    @Test
+    public void test10(){
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfigOfProfile.class);
+        String[] beanNamesForType = ctx.getBeanNamesForType(DataSource.class);
+        for (String beanName : beanNamesForType) {
+            System.out.println(beanName);
+        }
+        ctx.close();
     }
 }
