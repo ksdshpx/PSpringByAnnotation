@@ -3,6 +3,7 @@ package cn.ksdshpx.test;
 import cn.ksdshpx.bean.Boss;
 import cn.ksdshpx.bean.Car;
 import cn.ksdshpx.bean.Person;
+import cn.ksdshpx.bean.Yellow;
 import cn.ksdshpx.config.*;
 import cn.ksdshpx.dao.BookDao;
 import cn.ksdshpx.service.BookService;
@@ -119,11 +120,21 @@ public class SpringAnnotationTest {
 
     @Test
     public void test10(){
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfigOfProfile.class);
+        //AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfigOfProfile.class);
+        //1.创建一个IOC容器
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        //2.设置需要激活的环境
+        ctx.getEnvironment().setActiveProfiles("dev");
+        //3.注册主配置类
+        ctx.register(MainConfigOfProfile.class);
+        //4.启动刷新容器
+        ctx.refresh();
         String[] beanNamesForType = ctx.getBeanNamesForType(DataSource.class);
         for (String beanName : beanNamesForType) {
             System.out.println(beanName);
         }
+        Yellow yellow = ctx.getBean("yellow", Yellow.class);
+        System.out.println(yellow);
         ctx.close();
     }
 }
