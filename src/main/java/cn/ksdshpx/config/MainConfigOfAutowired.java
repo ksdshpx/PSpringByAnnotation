@@ -32,6 +32,10 @@ import org.springframework.context.annotation.Configuration;
  *          3.2）标注在构造器上：如果组件只有一个有参构造器，这个有参构造器的@Autowired可以省略，参数位置的组件还是从IOC容器中获取
  *          3.3）标注在参数上
  *
+ *  4）自定义组件想要使用Spring容器底层的一些组件（ApplicationContext,BeanFactory）
+ *      自定义组件实现xxxAware接口，在创建对象的时候，会调用接口规定的方法注入相关组件
+ *      把Spring底层一些组件注入到自定义的Bean中
+ *      xxxAware的功能都是使用xxxAwareProcessor来处理的，如ApplicationContextAware->ApplicationContextAwareProcessor
  */
 @ComponentScan({"cn.ksdshpx.controller","cn.ksdshpx.service","cn.ksdshpx.dao","cn.ksdshpx.bean"})
 @Configuration
