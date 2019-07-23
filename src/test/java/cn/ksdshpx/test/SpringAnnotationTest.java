@@ -1,5 +1,6 @@
 package cn.ksdshpx.test;
 
+import cn.ksdshpx.aop.MathCalculator;
 import cn.ksdshpx.bean.Boss;
 import cn.ksdshpx.bean.Car;
 import cn.ksdshpx.bean.Person;
@@ -135,6 +136,14 @@ public class SpringAnnotationTest {
         }
         Yellow yellow = ctx.getBean("yellow", Yellow.class);
         System.out.println(yellow);
+        ctx.close();
+    }
+
+    @Test
+    public void test11(){
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfigOfAOP.class);
+        MathCalculator mathCalculator = ctx.getBean(MathCalculator.class);
+        mathCalculator.div(1,0);
         ctx.close();
     }
 }
