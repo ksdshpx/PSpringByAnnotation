@@ -34,6 +34,23 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  *               ②.在切面类上的每个通知方法上标注通知注解，告诉Spring何时何地运行（切入点表达式）
  *               ③.开启基于注解的AOP模式@EnableAspectJAutoProxy
  *
+ *       AOP原理：【看给容器中注册了什么组件，这个组件什么时候工作，这个组件工作时候的功能是什么】
+ *             @EnableAspectJAutoProxy
+ *         1.@EnableAspectJAutoProxy是什么？
+ *              @Import(AspectJAutoProxyRegistrar.class)：给容器中导入AspectJAutoProxyRegistrar
+ *                  利用AspectJAutoProxyRegistear自定义给容器中注册bean
+ *                  internalAutoProxyCreator=AnnotationAwareAspectJAutoProxyCreator
+ *
+ *              给容器中注册一个AnnotationAwareAspectJAutoProxyCreator
+ *
+ *         2.AnnotationAwareAspectJAutoProxyCreator
+ *              AnnotationAwareAspectJAutoProxyCreator
+ *                  ->AspectJAwareAdvisorAutoProxyCreator
+ *                      ->AbstractAdvisorAutoProxyCreator
+ *                          ->AbstractAutoProxyCreator
+ *                              ->implements SmartInstantiationAwareBeanPostProcessor, BeanFactoryAware
+ *                              关注后置处理器（在Bean初始化前后做事情）、自动注入BeanFactory
+ *
  */
 @EnableAspectJAutoProxy
 @Configuration
