@@ -92,7 +92,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  *                              【BeanPostProcessor是在Bean对象创建完成初始化前后调用的】
  *                              【InstantiationAwareBeanPostProcessor是在创建Bean实例之前就尝试用后置处理器返回对象】
  *                              aa.resolveBeforeInstantiation(beanName, mbdToUse);解析BeforeInstantiation
- *                                  希望后置处理器在此能返回一个代理对象,如果能返回代理对象就是用,如果不能就继续
+ *                                  希望后置处理器在此能返回一个代理对象,如果能返回代理对象就是使用,如果不能就继续
  *                                  aaa.后置处理器先尝试返回对象
  *                                      bean = applyBeanPostProcessorsBeforeInstantiation()
  *                                          拿到所有后置处理器，如果是InstantiationAwareBeanPostProcessor就执行
@@ -101,6 +101,34 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  *                    						bean = applyBeanPostProcessorsAfterInitialization(bean, beanName);
  *                                       }
  *                              bb.doCreateBean(beanName, mbdToUse, args);真正的创建Bean实例，和3.6流程一样
+ *
+ *       AnnotationAwareAspectJAutoProxyCreator【InstantiationAwareBeanPostProcessor】的作用：
+ *       1）在每个Bean创建之前调用postProcessBeforeInstantiation
+ *          关心MathCalculator和LogAspects的创建
+ *          aa.判断当前Bean是否在advisedBeans（保存了所有需要增强的Bean）中
+ *          bb.判断当前Bean是否是基础类型的Advice、Pointcut、Advisor、AopInfrastructureBean，
+ *             或者是否是切面（@AspectJ）
+ *          cc.是否需要跳过
+ *              ①获取候选的增强器（切面的通知方法）【List<Advisor> candidateAdvisors】
+ *                  每一个封装的通知方法的增强器是InstantiationModelAwarePointcutAdvisor
+ *                  判断每一个增强器是否是AspectJPointcutAdvisor类型
+ *              ②永远放回false
+ *        2）创建对象
+ *         postProcessAfterInitialization
+ *           wrapIfNecessary(bean, beanName, cacheKey);//包装如果需要的情况下
+ *             aa.获取当前Bean的所有增强器（通知方法） Object[] specificInterceptors
+ *                aaa.找到所有候选的增强器（找哪些通知方法是需要切入当前Bean通知方法的）
+ *                bbb.找到能在当前Bean使用的增强器
+ *                ccc.给增强器排序
+ *             bb.保存当前Bean到advisedBeans中；
+ *             cc.如果当前Bean需要增强，创建当前Bean的代理对象
+ *                aaa.获取所有增强器（通知方法）
+ *                bbb.保存到proxyFactory中
+ *                ccc.创建代理对象：Spring自动决定
+ *                    JdkDynamicAopProxy(config)：JDK动态代理
+ *                    ObjenesisCglibAopProxy(config)：CGLIB动态代理
+ *             dd.给容器中返回当前组件使用cglib增强了的代理对象
+ *             ee.以后容器中获取到的就是这个组件的代理对象，执行目标方法的时候就会执行通知方法的流程
  */
 @EnableAspectJAutoProxy
 @Configuration
