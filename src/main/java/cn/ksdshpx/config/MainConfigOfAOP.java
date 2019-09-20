@@ -129,6 +129,23 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  *                    ObjenesisCglibAopProxy(config)：CGLIB动态代理
  *             dd.给容器中返回当前组件使用cglib增强了的代理对象
  *             ee.以后容器中获取到的就是这个组件的代理对象，执行目标方法的时候就会执行通知方法的流程
+ *         3）目标方法执行
+ *              容器中保存了组件的代理对象（cglib增强后的对象），这个对象里面保存了详细信息（增强器，目标对象等等）
+ *              aa.CglibAopProxy.intercept();拦截目标方法的执行
+ *              bb.根据ProxyFactory对象获取将要执行的目标方法的拦截器链；
+ *                  List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);
+ *                  aaa.List<Object> interceptorList保存所有拦截器（长度为5）
+ *                      一个默认的ExposeInvocationInterceptor和4个增强器
+ *                  bbb.遍历所有的增强器，将其转为Interceptor
+ *                      MethodInterceptor[] interceptors = registry.getInterceptors(advisor);
+ *                  ccc.将增强器转为List<MethodInterceptor>;
+ *                      如果是MethodInterceptor，直接加入到集合中
+ *                      如果不是，使用AdvisorAdapter将增强器转为MethodInterceptor
+ *                      转换完成返回MethodInterceptor数组
+ *              cc.如果没有拦截器链，直接执行目标方法；
+ *                  拦截器链（每一个通知方法又被包装为方法拦截器，利用MethodInterceptor机制）
+ *              dd.如果有拦截器链，把需要执行的目标对象、目标方法、拦截器链等信息创建一个CglibMethodInvocation对象并调用Object retVal = MethodInvocatoin.proceed()
+ *              ee.拦截器链的触发过程
  */
 @EnableAspectJAutoProxy
 @Configuration
